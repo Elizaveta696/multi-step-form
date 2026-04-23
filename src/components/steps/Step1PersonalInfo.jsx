@@ -2,24 +2,35 @@ import { useState } from 'react'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PHONE_REGEX = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,9}$/
+const NAME_CHARS_REGEX = /^[\p{L}\s'\-]+$/u
+const EMOJI_REGEX = /\p{Extended_Pictographic}/u
 
 export function validateStep1(formData) {
   const errors = {}
-  if (!formData.name.trim()) {
+
+  const name = formData.name.trim()
+  if (!name) {
     errors.name = 'This field is required'
-  } else if (formData.name.trim().length < 2) {
+  } else if (EMOJI_REGEX.test(name) || !NAME_CHARS_REGEX.test(name)) {
+    errors.name = 'Please enter a valid name'
+  } else if ((name.match(/\p{L}/gu) || []).length < 2) {
     errors.name = 'Please enter a valid name'
   }
-  if (!formData.email.trim()) {
+
+  const email = formData.email.trim()
+  if (!email) {
     errors.email = 'This field is required'
-  } else if (!EMAIL_REGEX.test(formData.email.trim())) {
+  } else if (EMOJI_REGEX.test(email) || !EMAIL_REGEX.test(email)) {
     errors.email = 'Please enter a valid email address'
   }
-  if (!formData.phone.trim()) {
+
+  const phone = formData.phone.trim()
+  if (!phone) {
     errors.phone = 'This field is required'
-  } else if (!PHONE_REGEX.test(formData.phone.trim())) {
+  } else if (EMOJI_REGEX.test(phone) || !PHONE_REGEX.test(phone)) {
     errors.phone = 'Please enter a valid phone number'
   }
+
   return errors
 }
 

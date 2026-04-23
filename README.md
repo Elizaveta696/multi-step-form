@@ -1,12 +1,5 @@
 # Multi-Step Form
 
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
-![alt text](image-5.png)
-![alt text](image-4.png)
-![alt text](image.png)
-
 A modern, responsive multi-step form for gaming platform subscription management.
 
 ## Features
@@ -73,3 +66,7 @@ multi-step-form/
 ## Browser Support
 
 Works on all modern browsers that support ES6 JavaScript and CSS Grid/Flexbox.
+
+ I'm talking about main-container!!! and it should be the same width on everu step,  do u understand that? I   
+  don't want it to change because it reduces the ux. it sshouldn't be haard, just make it a fixed one - so like 
+   on the first step for the whole experience
