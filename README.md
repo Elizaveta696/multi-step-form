@@ -1,6 +1,6 @@
 # Multi-Step Form
 
-A modern, responsive multi-step form for gaming platform subscription management.
+A modern, responsive multi-step subscription form built with React and Vite.
 
 ## Features
 
@@ -16,57 +16,73 @@ A modern, responsive multi-step form for gaming platform subscription management
   - Dynamic pricing updates based on billing cycle
 
 - **Form Validation**
-  - Name validation
-  - Email format validation
-  - Phone number validation
-  - Error messages for invalid inputs
+  - Name, email format, and phone number validation
+  - Inline error messages on invalid inputs
+  - Plan selection enforcement before proceeding
 
 - **User Experience**
-  - Step navigation with back/next buttons
-  - Direct step access via side indicators
-  - Data persistence when navigating between steps
+  - Back/Next navigation between steps
+  - Click sidebar indicators to jump to any completed step
+  - Data persists when navigating between steps
+  - Fixed-size container — no layout shift between steps
   - Responsive design (desktop and mobile)
-  - Smooth transitions and hover states
 
 ## Getting Started
 
-1. Open `index.html` in your web browser
-2. Fill out the form step by step
-3. Review your selections on the summary step
-4. Confirm your subscription
+```bash
+npm install
+npm run dev
+```
+
+Then open `http://localhost:5173` in your browser.
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
 
 ## File Structure
 
 ```
 multi-step-form/
-├── index.html          # HTML structure
-├── style.css           # Styling
-├── script.js           # Form logic and validation
-├── README.md           # This file
-└── multi-step-assets/  # Design reference and assets
-    ├── assets/         # Images and fonts
-    └── design/         # Design mockups
+├── index.html
+├── src/
+│   ├── main.jsx
+│   ├── App.jsx
+│   ├── index.css
+│   └── components/
+│       ├── Sidebar.jsx
+│       ├── Navigation.jsx
+│       └── steps/
+│           ├── Step1PersonalInfo.jsx
+│           ├── Step2SelectPlan.jsx
+│           ├── Step3AddOns.jsx
+│           ├── Step4Summary.jsx
+│           └── Step5ThankYou.jsx
+└── public/
+    └── assets/
 ```
 
-## Technologies Used
+## Technologies
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
+- React 18
+- Vite 5
+- CSS3 (Flexbox, Grid, custom properties)
 - Ubuntu Font (Google Fonts)
 
-## Colors Used
+## Colors
 
-- Marine Blue: `hsl(213, 96%, 18%)`
-- Purplish Blue: `hsl(243, 100%, 62%)`
-- Pastel Blue: `hsl(228, 100%, 84%)`
-- Strawberry Red: `hsl(354, 84%, 57%)`
-- Cool Gray: `hsl(231, 11%, 63%)`
+| Name | Value |
+|------|-------|
+| Marine Blue | `hsl(213, 96%, 18%)` |
+| Purplish Blue | `hsl(243, 100%, 62%)` |
+| Pastel Blue | `hsl(228, 100%, 84%)` |
+| Strawberry Red | `hsl(354, 84%, 57%)` |
+| Cool Gray | `hsl(231, 11%, 63%)` |
 
 ## Browser Support
 
-Works on all modern browsers that support ES6 JavaScript and CSS Grid/Flexbox.
-
- I'm talking about main-container!!! and it should be the same width on everu step,  do u understand that? I   
-  don't want it to change because it reduces the ux. it sshouldn't be haard, just make it a fixed one - so like 
-   on the first step for the whole experience
+All modern browsers supporting ES Modules, CSS Flexbox/Grid, and `scrollbar-gutter`.
