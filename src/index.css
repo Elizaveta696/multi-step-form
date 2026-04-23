@@ -8,26 +8,59 @@ html {
   scrollbar-gutter: stable;
 }
 
+/* ── Theme tokens ─────────────────────────────────────────────── */
+:root {
+  --color-primary:         hsl(213, 96%, 18%);
+  --color-bg:              hsl(217, 100%, 97%);
+  --color-surface:         #ffffff;
+  --color-surface-alt:     hsl(217, 100%, 97%);
+  --color-muted:           hsl(231, 11%, 63%);
+  --color-accent:          hsl(243, 100%, 62%);
+  --color-error:           hsl(354, 84%, 57%);
+  --color-border:          hsl(229, 24%, 87%);
+  --color-input-bg:        #ffffff;
+  --color-step-active-bg:  hsl(206, 94%, 87%);
+  --color-step-active-text:hsl(213, 96%, 18%);
+  --shadow:                0px 25px 40px -20px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --color-primary:         hsl(210, 80%, 88%);
+  --color-bg:              hsl(230, 17%, 10%);
+  --color-surface:         hsl(230, 15%, 17%);
+  --color-surface-alt:     hsl(230, 15%, 13%);
+  --color-muted:           hsl(231, 11%, 55%);
+  --color-accent:          hsl(243, 100%, 72%);
+  --color-error:           hsl(354, 84%, 65%);
+  --color-border:          hsl(230, 15%, 28%);
+  --color-input-bg:        hsl(230, 15%, 21%);
+  --color-step-active-bg:  hsl(206, 94%, 87%);
+  --color-step-active-text:hsl(213, 96%, 18%);
+  --shadow:                0px 25px 40px -20px rgba(0, 0, 0, 0.5);
+}
+
 body {
-  color: hsl(213, 96%, 18%);
+  color: var(--color-primary);
   font-family: 'Ubuntu', sans-serif;
-  background-color: hsl(217, 100%, 97%);
+  background-color: var(--color-bg);
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .main-container {
   display: flex;
-  box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--color-surface);
   width: 940px;
   max-width: calc(100vw - 40px);
   height: 600px;
   overflow: hidden;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 /* Side Section */
@@ -66,9 +99,9 @@ body {
 }
 
 .step-number.active {
-  background-color: hsl(206, 94%, 87%);
-  color: hsl(213, 96%, 18%);
-  border-color: hsl(206, 94%, 87%);
+  background-color: var(--color-step-active-bg);
+  color: var(--color-step-active-text);
+  border-color: var(--color-step-active-bg);
 }
 
 .step-label {
@@ -113,11 +146,11 @@ body {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 8px;
-  color: hsl(213, 96%, 18%);
+  color: var(--color-primary);
 }
 
 .step-content > p {
-  color: hsl(231, 11%, 63%);
+  color: var(--color-muted);
   margin-bottom: 32px;
   font-size: 16px;
   line-height: 1.5;
@@ -134,34 +167,35 @@ body {
   font-size: 12px;
   font-weight: 500;
   margin-bottom: 8px;
-  color: hsl(213, 96%, 18%);
+  color: var(--color-primary);
 }
 
 .form-group input {
   padding: 12px 16px;
-  border: 1px solid hsl(229, 24%, 87%);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-family: 'Ubuntu', sans-serif;
   font-size: 16px;
-  color: hsl(213, 96%, 18%);
-  transition: border-color 0.2s;
+  color: var(--color-primary);
+  background-color: var(--color-input-bg);
+  transition: border-color 0.2s, background-color 0.3s, color 0.3s;
 }
 
 .form-group input:hover {
-  border-color: hsl(213, 96%, 18%);
+  border-color: var(--color-primary);
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: hsl(243, 100%, 62%);
+  border-color: var(--color-accent);
 }
 
 .form-group input.invalid {
-  border-color: hsl(354, 84%, 57%);
+  border-color: var(--color-error);
 }
 
 .error-message {
-  color: hsl(354, 84%, 57%);
+  color: var(--color-error);
   font-size: 12px;
   margin-top: 4px;
 }
@@ -173,19 +207,20 @@ body {
   justify-content: center;
   gap: 16px;
   margin-bottom: 32px;
-  background-color: hsl(217, 100%, 97%);
+  background-color: var(--color-surface-alt);
   padding: 16px;
   border-radius: 8px;
+  transition: background-color 0.3s;
 }
 
 .toggle-label {
   font-size: 14px;
   font-weight: 500;
-  color: hsl(231, 11%, 63%);
+  color: var(--color-muted);
 }
 
 .toggle-label.active {
-  color: hsl(213, 96%, 18%);
+  color: var(--color-primary);
 }
 
 .toggle-switch {
@@ -208,7 +243,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: hsl(213, 96%, 18%);
+  background-color: var(--color-primary);
   transition: 0.3s;
   border-radius: 24px;
 }
@@ -220,7 +255,7 @@ body {
   width: 18px;
   left: 3px;
   bottom: 3px;
-  background-color: white;
+  background-color: var(--color-surface);
   transition: 0.3s;
   border-radius: 50%;
 }
@@ -239,7 +274,7 @@ input:checked + .slider:before {
 
 .plan-card {
   position: relative;
-  border: 2px solid hsl(229, 24%, 87%);
+  border: 2px solid var(--color-border);
   border-radius: 8px;
   padding: 24px;
   cursor: pointer;
@@ -249,13 +284,13 @@ input:checked + .slider:before {
 }
 
 .plan-card:hover {
-  border-color: hsl(243, 100%, 62%);
-  background-color: hsl(217, 100%, 97%);
+  border-color: var(--color-accent);
+  background-color: var(--color-surface-alt);
 }
 
 .plan-card.checked {
-  border-color: hsl(243, 100%, 62%);
-  background-color: hsl(217, 100%, 97%);
+  border-color: var(--color-accent);
+  background-color: var(--color-surface-alt);
 }
 
 .plan-icon {
@@ -279,18 +314,18 @@ input:checked + .slider:before {
 .plan-name {
   font-size: 16px;
   font-weight: 700;
-  color: hsl(213, 96%, 18%);
+  color: var(--color-primary);
 }
 
 .plan-price {
   font-size: 14px;
   font-weight: 700;
-  color: hsl(231, 11%, 63%);
+  color: var(--color-muted);
 }
 
 .plan-offer {
   font-size: 12px;
-  color: hsl(213, 96%, 18%);
+  color: var(--color-primary);
   margin-top: 4px;
 }
 
@@ -305,7 +340,7 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   padding: 20px;
-  border: 2px solid hsl(229, 24%, 87%);
+  border: 2px solid var(--color-border);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
@@ -313,20 +348,20 @@ input:checked + .slider:before {
 }
 
 .addon-card:hover {
-  border-color: hsl(243, 100%, 62%);
-  background-color: hsl(217, 100%, 97%);
+  border-color: var(--color-accent);
+  background-color: var(--color-surface-alt);
 }
 
 .addon-card.checked {
-  border-color: hsl(243, 100%, 62%);
-  background-color: hsl(217, 100%, 97%);
+  border-color: var(--color-accent);
+  background-color: var(--color-surface-alt);
 }
 
 .addon-checkbox {
   width: 20px;
   height: 20px;
   cursor: pointer;
-  accent-color: hsl(243, 100%, 62%);
+  accent-color: var(--color-accent);
   flex-shrink: 0;
 }
 
@@ -344,18 +379,18 @@ input:checked + .slider:before {
 .addon-name {
   font-size: 14px;
   font-weight: 500;
-  color: hsl(213, 96%, 18%);
+  color: var(--color-primary);
 }
 
 .addon-price {
   font-size: 14px;
   font-weight: 500;
-  color: hsl(243, 100%, 62%);
+  color: var(--color-accent);
 }
 
 .addon-description {
   font-size: 13px;
-  color: hsl(231, 11%, 63%);
+  color: var(--color-muted);
 }
 
 .checkmark-icon {
@@ -366,16 +401,17 @@ input:checked + .slider:before {
 
 /* Summary Container */
 .summary-container {
-  background-color: hsl(217, 100%, 97%);
+  background-color: var(--color-surface-alt);
   border-radius: 8px;
   padding: 24px;
   margin-bottom: 24px;
+  transition: background-color 0.3s;
 }
 
 .summary-section {
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid hsl(229, 24%, 87%);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .summary-item {
@@ -394,12 +430,12 @@ input:checked + .slider:before {
 .summary-label {
   font-size: 14px;
   font-weight: 700;
-  color: hsl(213, 96%, 18%);
+  color: var(--color-primary);
 }
 
 .summary-change-link {
   font-size: 13px;
-  color: hsl(231, 11%, 63%);
+  color: var(--color-muted);
   text-decoration: underline;
   cursor: pointer;
   font-weight: 400;
@@ -411,13 +447,13 @@ input:checked + .slider:before {
 }
 
 .summary-change-link:hover {
-  color: hsl(243, 100%, 62%);
+  color: var(--color-accent);
 }
 
 .summary-price {
   font-size: 14px;
   font-weight: 700;
-  color: hsl(213, 96%, 18%);
+  color: var(--color-primary);
 }
 
 .summary-addon-item {
@@ -429,17 +465,17 @@ input:checked + .slider:before {
 }
 
 .summary-addon-item > span:first-child {
-  color: hsl(231, 11%, 63%);
+  color: var(--color-muted);
 }
 
 .summary-addon-item > span:last-child {
-  color: hsl(213, 96%, 18%);
+  color: var(--color-primary);
   font-weight: 500;
 }
 
 .summary-divider {
   height: 1px;
-  background-color: hsl(229, 24%, 87%);
+  background-color: var(--color-border);
   margin: 16px 0;
 }
 
@@ -454,13 +490,13 @@ input:checked + .slider:before {
 
 .total-label {
   font-size: 14px;
-  color: hsl(231, 11%, 63%);
+  color: var(--color-muted);
 }
 
 .total-price {
   font-size: 20px;
   font-weight: 700;
-  color: hsl(243, 100%, 62%);
+  color: var(--color-accent);
 }
 
 /* Thank You */
@@ -494,7 +530,7 @@ input:checked + .slider:before {
   max-width: 400px;
   font-size: 16px;
   line-height: 1.6;
-  color: hsl(231, 11%, 63%);
+  color: var(--color-muted);
   margin-bottom: 0;
 }
 
@@ -518,32 +554,148 @@ input:checked + .slider:before {
 }
 
 .btn-primary {
-  background-color: hsl(213, 96%, 18%);
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-bg);
   margin-left: auto;
 }
 
 .btn-primary:hover {
-  background-color: hsl(213, 96%, 28%);
+  opacity: 0.85;
 }
 
 .btn-confirm {
-  background-color: hsl(243, 100%, 62%);
+  background-color: var(--color-accent);
   color: white;
   margin-left: auto;
 }
 
 .btn-confirm:hover {
-  background-color: hsl(243, 100%, 72%);
+  opacity: 0.85;
 }
 
 .btn-secondary {
   background-color: transparent;
-  color: hsl(231, 11%, 63%);
+  color: var(--color-muted);
 }
 
 .btn-secondary:hover {
-  color: hsl(213, 96%, 18%);
+  color: var(--color-primary);
+}
+
+/* Language selector */
+.lang-selector {
+  position: fixed;
+  top: 20px;
+  right: 74px;
+  z-index: 100;
+}
+
+.lang-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  transition: border-color 0.2s, background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+.lang-btn:hover,
+.lang-btn.open {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+
+.lang-btn:hover {
+  transform: scale(1.1);
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  min-width: 110px;
+  animation: langFadeDown 0.15s ease;
+}
+
+@keyframes langFadeDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background-color 0.15s;
+  white-space: nowrap;
+}
+
+.lang-option:hover {
+  background-color: var(--color-surface-alt);
+}
+
+.lang-option.active {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  transition: border-color 0.2s, background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-accent);
+  transform: scale(1.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.4s ease;
 }
 
 /* Responsive Design */
@@ -622,5 +774,15 @@ input:checked + .slider:before {
 
   .addon-card {
     flex-wrap: wrap;
+  }
+
+  .theme-toggle {
+    top: 12px;
+    right: 12px;
+  }
+
+  .lang-selector {
+    top: 12px;
+    right: 66px;
   }
 }

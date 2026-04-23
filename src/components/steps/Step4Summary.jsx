@@ -1,9 +1,11 @@
 import { PLANS, ADDONS } from '../../data/constants'
+import { useLang } from '../../context/LangContext'
 
 export default function Step4Summary({ formData, onChangePlan }) {
+  const { t } = useLang()
   const isYearly = formData.billing === 'yearly'
   const suffix = isYearly ? 'yr' : 'mo'
-  const billingLabel = isYearly ? 'Yearly' : 'Monthly'
+  const billingLabel = isYearly ? t.step4.yearly : t.step4.monthly
 
   const planPrice = formData.plan ? PLANS[formData.plan][formData.billing] : 0
   const addonTotal = formData.addons.reduce(
@@ -18,8 +20,8 @@ export default function Step4Summary({ formData, onChangePlan }) {
 
   return (
     <div className="step-content">
-      <h1>Finishing up</h1>
-      <p>Double-check everything looks OK before confirming.</p>
+      <h1>{t.step4.heading}</h1>
+      <p>{t.step4.subheading}</p>
       <div className="summary-container">
         <div className="summary-section">
           <div className="summary-item">
@@ -28,7 +30,7 @@ export default function Step4Summary({ formData, onChangePlan }) {
                 {planName} ({billingLabel})
               </div>
               <button className="summary-change-link" onClick={onChangePlan}>
-                Change
+                {t.step4.change}
               </button>
             </div>
             <div className="summary-price">
@@ -38,13 +40,15 @@ export default function Step4Summary({ formData, onChangePlan }) {
           <div className="summary-divider"></div>
           {formData.addons.map((key) => (
             <div key={key} className="summary-addon-item">
-              <span>{ADDONS[key].name}</span>
+              <span>{t.step3.addons[key].name}</span>
               <span>+${ADDONS[key][formData.billing]}/{suffix}</span>
             </div>
           ))}
         </div>
         <div className="summary-total">
-          <div className="total-label">Total (per {isYearly ? 'year' : 'month'})</div>
+          <div className="total-label">
+            {isYearly ? t.step4.totalYear : t.step4.totalMonth}
+          </div>
           <div className="total-price">+${total}/{suffix}</div>
         </div>
       </div>

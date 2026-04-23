@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLang } from '../../context/LangContext'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const PHONE_REGEX = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,9}$/
@@ -34,7 +35,15 @@ export function validateStep1(formData) {
   return errors
 }
 
+const ERROR_EN_TO_KEY = {
+  'This field is required':            'required',
+  'Please enter a valid name':         'invalidName',
+  'Please enter a valid email address':'invalidEmail',
+  'Please enter a valid phone number': 'invalidPhone',
+}
+
 export default function Step1PersonalInfo({ formData, onChange, externalErrors }) {
+  const { t } = useLang()
   const [touched, setTouched] = useState({})
 
   const errors = validateStep1(formData)
@@ -42,61 +51,68 @@ export default function Step1PersonalInfo({ formData, onChange, externalErrors }
     Object.entries(errors).filter(([key]) => touched[key] || externalErrors?.[key])
   )
 
+  function translateError(msg) {
+    const key = ERROR_EN_TO_KEY[msg]
+    return key ? t.step1.errors[key] : msg
+  }
+
   function handleBlur(field) {
     setTouched((prev) => ({ ...prev, [field]: true }))
   }
 
+  const { fields } = t.step1
+
   return (
     <div className="step-content">
-      <h1>Personal info</h1>
-      <p>Please provide your name, email address, and phone number.</p>
+      <h1>{t.step1.heading}</h1>
+      <p>{t.step1.subheading}</p>
       <form id="step-1-form" onSubmit={(e) => e.preventDefault()}>
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">{fields.name.label}</label>
           <input
             type="text"
             id="name"
             name="name"
-            placeholder="e.g. Stephen King"
+            placeholder={fields.name.placeholder}
             value={formData.name}
             onChange={(e) => onChange('name', e.target.value)}
             onBlur={() => handleBlur('name')}
             className={visibleErrors.name ? 'invalid' : ''}
           />
           {visibleErrors.name && (
-            <span className="error-message">{visibleErrors.name}</span>
+            <span className="error-message">{translateError(visibleErrors.name)}</span>
           )}
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor="email">{fields.email.label}</label>
           <input
             type="email"
             id="email"
             name="email"
-            placeholder="e.g. stephen@lorem.com"
+            placeholder={fields.email.placeholder}
             value={formData.email}
             onChange={(e) => onChange('email', e.target.value)}
             onBlur={() => handleBlur('email')}
             className={visibleErrors.email ? 'invalid' : ''}
           />
           {visibleErrors.email && (
-            <span className="error-message">{visibleErrors.email}</span>
+            <span className="error-message">{translateError(visibleErrors.email)}</span>
           )}
         </div>
         <div className="form-group">
-          <label htmlFor="phone">Phone Number</label>
+          <label htmlFor="phone">{fields.phone.label}</label>
           <input
             type="tel"
             id="phone"
             name="phone"
-            placeholder="e.g. +358 234 567 890"
+            placeholder={fields.phone.placeholder}
             value={formData.phone}
             onChange={(e) => onChange('phone', e.target.value)}
             onBlur={() => handleBlur('phone')}
             className={visibleErrors.phone ? 'invalid' : ''}
           />
           {visibleErrors.phone && (
-            <span className="error-message">{visibleErrors.phone}</span>
+            <span className="error-message">{translateError(visibleErrors.phone)}</span>
           )}
         </div>
       </form>

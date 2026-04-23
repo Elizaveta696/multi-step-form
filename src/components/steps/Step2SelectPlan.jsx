@@ -1,15 +1,17 @@
-import arcadeIcon from '../../assets/images/icon-arcade.svg'
+import arcadeIcon   from '../../assets/images/icon-arcade.svg'
 import advancedIcon from '../../assets/images/icon-advanced.svg'
-import proIcon from '../../assets/images/icon-pro.svg'
+import proIcon      from '../../assets/images/icon-pro.svg'
 import { PLANS } from '../../data/constants'
+import { useLang } from '../../context/LangContext'
 
 const PLAN_META = [
-  { value: 'arcade', label: 'Arcade', icon: arcadeIcon },
+  { value: 'arcade',   label: 'Arcade',   icon: arcadeIcon },
   { value: 'advanced', label: 'Advanced', icon: advancedIcon },
-  { value: 'pro', label: 'Pro', icon: proIcon },
+  { value: 'pro',      label: 'Pro',      icon: proIcon },
 ]
 
 export default function Step2SelectPlan({ formData, onChange }) {
+  const { t } = useLang()
   const isYearly = formData.billing === 'yearly'
 
   function handleToggle() {
@@ -22,8 +24,8 @@ export default function Step2SelectPlan({ formData, onChange }) {
 
   return (
     <div className="step-content">
-      <h1>Select your plan</h1>
-      <p>You have the option of monthly or yearly billing.</p>
+      <h1>{t.step2.heading}</h1>
+      <p>{t.step2.subheading}</p>
 
       <div className="plans-container">
         {PLAN_META.map((plan) => (
@@ -49,23 +51,19 @@ export default function Step2SelectPlan({ formData, onChange }) {
                   ? `$${PLANS[plan.value].yearly}/yr`
                   : `$${PLANS[plan.value].monthly}/mo`}
               </div>
-              {isYearly && <div className="plan-offer">2 months free</div>}
+              {isYearly && <div className="plan-offer">{t.step2.monthsFree}</div>}
             </div>
           </label>
         ))}
       </div>
 
       <div className="plan-toggle">
-        <span className={`toggle-label${!isYearly ? ' active' : ''}`}>Monthly</span>
+        <span className={`toggle-label${!isYearly ? ' active' : ''}`}>{t.step2.monthly}</span>
         <label className="toggle-switch">
-          <input
-            type="checkbox"
-            checked={isYearly}
-            onChange={handleToggle}
-          />
+          <input type="checkbox" checked={isYearly} onChange={handleToggle} />
           <span className="slider"></span>
         </label>
-        <span className={`toggle-label${isYearly ? ' active' : ''}`}>Yearly</span>
+        <span className={`toggle-label${isYearly ? ' active' : ''}`}>{t.step2.yearly}</span>
       </div>
     </div>
   )
