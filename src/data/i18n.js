@@ -27,7 +27,7 @@ const en = {
     monthsFree: '2 months free',
     monthly:    'Monthly',
     yearly:     'Yearly',
-    noplan:     'Please select a plan',
+    noplan:     'Please select a plan you want to have',
   },
   step3: {
     heading:    'Pick add-ons',

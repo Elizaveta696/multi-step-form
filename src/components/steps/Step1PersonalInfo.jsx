@@ -6,6 +6,8 @@ const PHONE_REGEX = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[
 const NAME_CHARS_REGEX = /^[\p{L}\s'\-]+$/u
 const EMOJI_REGEX = /\p{Extended_Pictographic}/u
 
+
+
 export function validateStep1(formData) {
   const errors = {}
 
